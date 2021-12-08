@@ -1,3 +1,12 @@
+import { printError, printTimer } from '../utils/print.js';
+
+import { HowlToExport } from '../libs/howler.js';
+
+export var sound = new Howl({
+    src: ['./audio/sound.mp3'],
+
+});
+
 
 let startButton = document.getElementById('butStart'),
     stopButton = document.getElementById('butStop'),
@@ -12,11 +21,27 @@ startButton.onclick = function (event) {
         let secondsLabel = +document.getElementById('sec').value,
             minutesLabel = +document.getElementById('minute').value;
         let totalSeconds = secondsLabel + minutesLabel * 60;
-        timer = setInterval(() => { setTime(totalSeconds); totalSeconds-- }, 1000);
+        if (secondsLabel < 0 || minutesLabel < 0) {
+            printError("Введите оба числа не меньше нуля!", out);
+        } else {
+            timer = setInterval(() => {
+
+                printTimer(totalSeconds, out);
+                if (totalSeconds == 0) {
+                    console.log("end");
+                    sound.play();
+                    clearInterval(timer);
+                    timer = null;
+                }
+                totalSeconds--;
+
+            }, 1000);
+        }
     }
 };
 
 stopButton.onclick = function (event) {
+    sound.stop();
     event.preventDefault();
 
     if (timer) {
@@ -26,19 +51,3 @@ stopButton.onclick = function (event) {
 };
 
 
-function setTime(totalSeconds) {
-
-    out.innerHTML = `00:${pad(parseInt(totalSeconds / 60))}:${pad(totalSeconds % 60)}:`;
-
-}
-
-function pad(val) {
-    var valString = val + "";
-    if (valString.length < 2) {
-        return "0" + valString;
-    } else {
-        return valString;
-    }
-}
-
-;
