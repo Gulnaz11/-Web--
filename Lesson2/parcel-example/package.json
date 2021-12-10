@@ -1,5 +1,7 @@
 {
   "devDependencies": {
-    "parcel-bundler": "^1.12.5"
+    "luxon": "^2.1.1",
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.44.0"
   }
 }
