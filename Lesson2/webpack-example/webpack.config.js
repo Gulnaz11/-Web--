@@ -2,6 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+
 module.exports = {
     entry: path.resolve('src', 'js', 'main.js'),
     output: {
@@ -25,6 +26,10 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
+            {
+                test: /\.mp3$/,
+                loader: 'file-loader',
             }
         ]
     }
