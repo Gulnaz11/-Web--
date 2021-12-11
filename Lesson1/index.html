@@ -6,24 +6,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Калькулятор дат</title>
+
+
     <script type="module" src="./js/main.js"></script>
+
+
+
+    <style>
+        .noView {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-    <h2>Калькулятор дат</h2>
-    <form id="calcDate">
-        <label for="dateFrom">
-            Первая дата:
-            <input type="date" name="dateFrom" id="dateFrom">
-        </label>
-        <label for="dateTo">
-            Вторая дата:
-            <input type="date" name="dateTo" id="dateTo">
-        </label>
-        <button type="submit">Рассчитать промежуток</button>
-    </form>
-    <p id="output">
-    </p>
+    <div id="tablist">
+        <button id="butDate">
+            Калькулятор дат
+        </button>
+        <button id="butTimer">
+            Таймер
+        </button>
+        <div class="dateCalc noView">
+            <h2>Калькулятор дат</h2>
+            <form id="calcDate">
+
+                <label for="dateFrom">
+                    Первая дата:
+                    <input type="date" name="dateFrom" id="dateFrom">
+                </label>
+                <label for="dateTo">
+                    Вторая дата:
+                    <input type="date" name="dateTo" id="dateTo">
+                </label>
+                <button type="submit">Рассчитать промежуток</button>
+            </form>
+            <p id="output">
+            </p>
+        </div>
+
+        <div class="timer noView">
+            <h2>Таймер</h2>
+            <form id="timer">
+                <label for="minute">
+                    Введите колличество минут:
+                    <input type="number" name="minute" id="minute" min="0" max="59">
+                </label>
+                <br>
+                <label for="sec">
+                    Введите колличество секунд:
+                    <input type="number" name="sec" id="sec" min="0" max="59">
+                </label>
+                <br>
+                <button type="click" id="butStart"> Старт</button>
+                <button type="click" id="butStop"> Стоп</button>
+            </form>
+            <p id="out">
+            </p>
+        </div>
+
 </body>
 
 </html>
