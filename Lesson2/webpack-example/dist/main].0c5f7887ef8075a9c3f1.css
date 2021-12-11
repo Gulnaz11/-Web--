@@ -4,3 +4,6 @@
 *{
     margin: auto;
 }
+.noView {
+    display: none;
+}
