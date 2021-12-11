@@ -1,4 +1,10 @@
 {
+  "main": "index.html",
+  "scripts": {
+    "test": "echo\"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=prodaction",
+    "start": "webpack serve --mode=development"
+  },
   "devDependencies": {
     "css-loader": "^6.5.1",
     "file-loader": "^6.2.0",
