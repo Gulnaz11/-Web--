@@ -1,4 +1,11 @@
 {
+  "name": "parcel-example",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo\"Error:no test specifies\" && exit 1",
+    "production": "parcel build src/index.html",
+    "start": "parcel src/index.html"
+  },
   "devDependencies": {
     "luxon": "^2.1.1",
     "parcel-bundler": "^1.12.5",
