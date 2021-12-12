@@ -1,6 +1,7 @@
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: path.resolve('src', 'js', 'main.js'),
@@ -14,7 +15,8 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: path.resolve('src', 'template.html'),
-        })
+        }),
+        new BundleAnalyzerPlugin()
     ],
     module: {
         rules: [
@@ -25,6 +27,10 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
+            {
+                test: /\.mp3$/,
+                loader: 'file-loader',
             }
         ]
     }
