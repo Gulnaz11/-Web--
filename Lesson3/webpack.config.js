@@ -1,12 +1,13 @@
+require('dotenv').config();
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== "production";
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { extendDefaultPlugins } = require("svgo");
+//const { extendDefaultPlugins } = require("svgo");
 
 
-console.log("devMod=" + devMode + ' ' + process.env.NODE_ENV);
+console.log("devMod=" + devMode);
 module.exports = {
     entry: path.resolve('src', 'js', 'main.js'),
     output: {
@@ -31,9 +32,8 @@ module.exports = {
             },
             {
                 test: /\.(jpg)$/i,
-                type: "asset",
-                use: ('file-loader')
-
+                use: ('file-loader'),
+                type: "asset"
             }
 
         ]
@@ -53,8 +53,25 @@ module.exports = {
             new ImageMinimizerPlugin({
                 minimizer: {
                     implementation: ImageMinimizerPlugin.squooshMinify,
-                }
-            }),
+                    options: {
+                        encodeOptions: {
+                            mozjpeg: {
+                                // That setting might be close to lossless, but it’s not guaranteed
+                                // https://github.com/GoogleChromeLabs/squoosh/issues/85
+                                quality: 100,
+                            },
+                            webp: {
+                                lossless: 1,
+                            },
+                            avif: {
+                                // https://github.com/GoogleChromeLabs/squoosh/blob/dev/codecs/avif/enc/README.md
+                                cqLevel: 0,
+                            },
+                        },
+                    },
+                },
+            }
+            )
         ],
     }
 }
