@@ -4,10 +4,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== "production";
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//const { extendDefaultPlugins } = require("svgo");
+const { extendDefaultPlugins } = require("svgo");
 
 
-console.log("devMod=" + devMode);
+console.log("devMod - " + devMode);
 module.exports = {
     entry: path.resolve('src', 'js', 'main.js'),
     output: {
@@ -50,28 +50,40 @@ module.exports = {
     ],
     optimization: {
         minimizer: [
+            "...",
             new ImageMinimizerPlugin({
                 minimizer: {
-                    implementation: ImageMinimizerPlugin.squooshMinify,
+                    implementation: ImageMinimizerPlugin.imageminMinify,
                     options: {
-                        encodeOptions: {
-                            mozjpeg: {
-                                // That setting might be close to lossless, but it’s not guaranteed
-                                // https://github.com/GoogleChromeLabs/squoosh/issues/85
-                                quality: 100,
-                            },
-                            webp: {
-                                lossless: 1,
-                            },
-                            avif: {
-                                // https://github.com/GoogleChromeLabs/squoosh/blob/dev/codecs/avif/enc/README.md
-                                cqLevel: 0,
-                            },
-                        },
+                        // Lossless optimization with custom option
+                        // Feel free to experiment with options for better result for you
+                        plugins: [
+                            ["gifsicle", { interlaced: true }],
+                            ["jpegtran", { progressive: true }],
+                            ["optipng", { optimizationLevel: 5 }],
+                            // Svgo configuration here https://github.com/svg/svgo#configuration
+                            [
+                                "svgo",
+                                {
+                                    plugins: extendDefaultPlugins([
+                                        {
+                                            name: "removeViewBox",
+                                            active: false,
+                                        },
+                                        {
+                                            name: "addAttributesToSVGElement",
+                                            params: {
+                                                attributes: [{ xmlns: "http://www.w3.org/2000/svg" }],
+                                            },
+                                        },
+                                    ]),
+                                },
+                            ],
+                        ],
                     },
                 },
-            }
-            )
+            }),
         ],
+
     }
 }
