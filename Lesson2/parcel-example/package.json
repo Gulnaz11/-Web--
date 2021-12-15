@@ -1,6 +1,5 @@
 {
   "name": "parcel-example",
-  "main": "index.html",
   "scripts": {
     "test": "echo\"Error:no test specifies\" && exit 1",
     "production": "parcel build src/index.html",
