@@ -1,0 +1,40 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+}
+
+.wrap{
+    max-width: 1140px;    
+}    
+
+.title{
+    margin: 30px;
+    margin-left: 5px;
+}
+
+img {
+    width: 250px;
+    height: 190px;
+}
+video {
+    width: 250px;
+    height: 190px;
+}
+audio {
+    width: 250px;
+    height: 190px;
+}
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 290px);    
+}
+.media{
+    border: 1px solid gray;
+    padding: 15px;
+    align-items: center;
+    margin: 5px;
+}
+p{
+    font-family: 'Lato', sans-serif;
+    
+}
